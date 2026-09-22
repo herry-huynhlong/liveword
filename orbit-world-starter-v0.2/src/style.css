@@ -1,0 +1,90 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #05070b;
+  color: #f5f7fb;
+}
+
+* { box-sizing: border-box; }
+html, body, #app { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { background: radial-gradient(circle at 50% 40%, #0d1b2a 0%, #06080d 52%, #030408 100%); }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+#globe { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+
+.glass {
+  background: rgba(8, 12, 18, 0.72);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.22);
+}
+
+.topbar {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  z-index: 10;
+  min-height: 58px;
+  border-radius: 18px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: auto minmax(220px, 720px) auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.brand { display: flex; align-items: center; gap: 9px; font-weight: 800; letter-spacing: .14em; font-size: 13px; }
+.brand-mark { font-size: 20px; color: #8dd7ff; }
+.search { display: grid; grid-template-columns: 1fr auto; gap: 8px; min-width: 0; }
+.search input {
+  width: 100%; min-width: 0; height: 38px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10); color: #fff; background: rgba(255,255,255,.055);
+  padding: 0 13px; outline: none;
+}
+.search input:focus { border-color: rgba(141,215,255,.7); box-shadow: 0 0 0 3px rgba(141,215,255,.12); }
+.search button, .panel-actions button {
+  border: 0; border-radius: 11px; padding: 0 14px; font-weight: 700;
+  color: #07111a; background: #8dd7ff;
+}
+.clock { color: #aeb8c7; font-variant-numeric: tabular-nums; font-size: 12px; text-align: right; white-space: nowrap; }
+
+.panel {
+  position: absolute; z-index: 12; top: 94px; right: 18px; width: min(360px, calc(100vw - 36px));
+  border-radius: 22px; padding: 22px; transition: opacity .2s ease, transform .2s ease;
+}
+.panel.hidden { opacity: 0; transform: translateX(20px); pointer-events: none; }
+.close { position: absolute; right: 12px; top: 10px; }
+.icon-btn { border: 0; background: transparent; color: #c7ced8; font-size: 26px; width: 42px; height: 42px; }
+.entity-kicker { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; color: #8dd7ff; margin-bottom: 8px; }
+.panel h1 { font-size: 25px; margin: 0 42px 8px 0; line-height: 1.1; }
+.status-row { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; }
+.status { font-size: 12px; border-radius: 999px; padding: 5px 9px; background: rgba(126, 255, 190, .12); color: #a6ffd0; border: 1px solid rgba(126,255,190,.18); }
+.muted { color: #8d98a8; font-size: 12px; }
+.stats { display: grid; gap: 10px; margin: 0; }
+.stats div { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,.07); padding-bottom: 9px; }
+.stats dt { color: #8d98a8; font-size: 12px; }
+.stats dd { margin: 0; font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; }
+.panel-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 18px; }
+.panel-actions button { height: 42px; }
+.panel-actions .secondary { color: #dfe7f2; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.09); }
+
+.layers {
+  position: absolute; z-index: 10; left: 18px; bottom: 18px;
+  padding: 7px; border-radius: 16px; display: flex; gap: 5px;
+}
+.layer { width: 44px; height: 44px; border: 0; border-radius: 11px; background: rgba(255,255,255,.035); opacity: .42; font-size: 20px; }
+.layer.active { opacity: 1; background: rgba(141,215,255,.10); outline: 1px solid rgba(141,215,255,.20); }
+.hint { position: absolute; z-index: 8; bottom: 20px; left: 50%; transform: translateX(-50%); color: #909bab; padding: 9px 13px; border-radius: 12px; font-size: 11px; white-space: nowrap; }
+.toast { position: absolute; z-index: 20; top: 88px; left: 50%; transform: translate(-50%, -8px); opacity: 0; pointer-events: none; background: #111824; color: #eaf0f8; border: 1px solid rgba(255,255,255,.1); padding: 9px 12px; border-radius: 10px; font-size: 12px; transition: .2s ease; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 760px) {
+  .topbar { grid-template-columns: 1fr auto; }
+  .brand { display: none; }
+  .clock { font-size: 10px; }
+  .panel { top: 88px; }
+  .hint { display: none; }
+}
